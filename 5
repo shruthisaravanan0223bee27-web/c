@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define MAX_STRING_LENGTH 100
+char*allocatestringmemory()
+  {
+     return(char*)malloc(MAX_STRING_LENGTH*sizeof(char));
+  }
+ void inputstrings(char**stringlist,int n)
+    {
+      for(int i=0;i<n;i++)
+           {
+              stringlist[i]=allocatestringmemory();
+              if(stringlist[i]==NULL)
+                {
+                   printf("\n Memory allocation failed");
+                   exit(1);
+                }
+               printf("Enter string %d:\n",i+1);
+               scanf("%s",stringlist[i]);
+            }
+    }
+ void searchtargetstring(char**stringlist,int numstrings)
+{
+   char target[MAX_STRING_LENGTH];
+   printf("Enter the target string to search:\n");
+   scanf("%s",target);
+   int m=0;
+   for(int i=0;i<numstrings;i++)
+         {
+           if(strcmp(stringlist[i],target)==0)
+               {
+                  m=1;
+                  printf("\nTarget string found at index %d",i);
+                  break;
+
+               }
+         }
+       if(!m)
+          {
+             printf("\nTarget string not found in the list");
+           }
+}
+    void freestringmemory(char**stringlist,int numstrings)
+   {
+      for(int i=0;i<numstrings;i++)
+         {
+            free(stringlist[i]);
+         }
+            free(stringlist);
+    }
+   int main()
+     {
+        int numstrings;
+         printf("\nEnter the number of strings:");
+         scanf("%d",&numstrings);
+          if(numstrings<=0)
+             {
+                printf("\n Invalid number of strings");
+                return 1;
+             }
+         char**stringlist=(char**)malloc(numstrings*sizeof(char*));
+          if(stringlist==NULL)
+             {
+                printf("\nMemory allocation failed");
+                return 1;
+             }
+         inputstrings(stringlist,numstrings);
+         searchtargetstring(stringlist,numstrings);
+         freestringmemory(stringlist,numstrings);
+         return 0;
+      }
