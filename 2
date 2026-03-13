@@ -1,0 +1,21 @@
+#include<stdio.h>
+int main()
+{
+   char anskey[]={'A','B','C','D'};
+   char res[5][4];
+   int mark=0,i,j;
+   for(i=0;i<5;i++)
+   {
+      printf("\nenter result for student%d:", i+1);
+      for(j=0;j<4;j++)
+      {
+         scanf("%s",&res[i][j]);
+         if(res[i][j]==anskey[j])
+         {
+            mark+=10;
+         }
+      }
+        printf("\nstudents%d got%d marks",i+1,mark);
+      }
+      return 0;
+   }
